@@ -1,0 +1,459 @@
+# 🌸 Mother’s Day Surprise Website
+
+Save this as `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Mummy ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(to bottom,#fff5f7,#ffe4ec);
+      overflow-x:hidden;
+      color:#7a3552;
+    }
+
+    .page{
+      min-height:100vh;
+      display:none;
+      padding:30px 20px;
+      position:relative;
+    }
+
+    .active{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+    }
+
+    h1{
+      font-family:'Playfair Display',serif;
+      font-size:58px;
+      margin-top:20px;
+      color:#6d1d40;
+    }
+
+    .sub{
+      margin-top:10px;
+      color:#b06b87;
+      text-align:center;
+      line-height:1.6;
+    }
+
+    .gift-box{
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#ff4f98,#c60064);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:75px;
+      box-shadow:0 20px 50px rgba(255,0,111,.3);
+      animation:float 3s ease-in-out infinite;
+      margin-top:25px;
+    }
+
+    @keyframes float{
+      0%,100%{transform:translateY(0px)}
+      50%{transform:translateY(-12px)}
+    }
+
+    .btn{
+      margin-top:35px;
+      padding:18px 35px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ff4f98,#c60064);
+      color:white;
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:1px;
+      box-shadow:0 10px 30px rgba(255,0,111,.25);
+      cursor:pointer;
+    }
+
+    .heading{
+      text-align:center;
+      margin-top:20px;
+    }
+
+    .heading h2{
+      font-family:'Playfair Display',serif;
+      font-size:46px;
+      color:#7a2047;
+    }
+
+    .heading p{
+      margin-top:8px;
+      color:#b26b86;
+    }
+
+    .balloons{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:30px;
+      margin-top:40px;
+      padding-bottom:40px;
+    }
+
+    .balloon{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      cursor:pointer;
+      transition:.3s;
+    }
+
+    .balloon:hover{
+      transform:scale(1.05);
+    }
+
+    .bubble{
+      width:110px;
+      height:140px;
+      border-radius:50%;
+      position:relative;
+      animation:float 4s ease-in-out infinite;
+      box-shadow:inset -10px -10px 20px rgba(0,0,0,.08);
+    }
+
+    .bubble::before{
+      content:'';
+      position:absolute;
+      width:20px;
+      height:20px;
+      background:rgba(255,255,255,.7);
+      border-radius:50%;
+      top:20px;
+      left:25px;
+    }
+
+    .string{
+      width:2px;
+      height:90px;
+      background:#999;
+    }
+
+    .popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:99;
+    }
+
+    .popup-card{
+      width:320px;
+      background:white;
+      border-radius:25px;
+      padding:18px;
+      text-align:center;
+      animation:pop .4s ease;
+    }
+
+    @keyframes pop{
+      from{transform:scale(.7);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
+
+    .popup-card img{
+      width:100%;
+      border-radius:18px;
+      object-fit:cover;
+      max-height:360px;
+    }
+
+    .popup-card h3{
+      margin-top:15px;
+      font-family:'Playfair Display',serif;
+      color:#7a2047;
+    }
+
+    .popup-card p{
+      margin-top:8px;
+      color:#8b6170;
+      line-height:1.6;
+    }
+
+    .close{
+      margin-top:15px;
+      border:none;
+      padding:12px 25px;
+      border-radius:999px;
+      background:#ff4f98;
+      color:white;
+      cursor:pointer;
+    }
+
+    .letter-box{
+      width:100%;
+      max-width:370px;
+      background:white;
+      padding:30px;
+      border-radius:25px;
+      margin-top:35px;
+      box-shadow:0 10px 40px rgba(0,0,0,.08);
+      line-height:2;
+      color:#6f5160;
+      font-size:17px;
+    }
+
+    .letter-title{
+      text-align:center;
+      font-family:'Playfair Display',serif;
+      font-size:45px;
+      color:#7a2047;
+    }
+
+    .love{
+      margin-top:25px;
+      text-align:right;
+      font-family:'Playfair Display',serif;
+      color:#c60064;
+      font-size:28px;
+    }
+
+    .flower{
+      position:absolute;
+      font-size:22px;
+      animation:fall linear infinite;
+      opacity:.8;
+    }
+
+    @keyframes fall{
+      from{
+        transform:translateY(-100px) rotate(0deg);
+      }
+      to{
+        transform:translateY(110vh) rotate(360deg);
+      }
+    }
+
+    .music-btn{
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      background:white;
+      border:none;
+      padding:14px 18px;
+      border-radius:999px;
+      box-shadow:0 10px 25px rgba(0,0,0,.1);
+      font-size:16px;
+      cursor:pointer;
+      z-index:100;
+    }
+
+    .next-btn{
+      margin-top:25px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgMusic" loop>
+    <source src="YOUR_MUSIC_LINK_HERE.mp3" type="audio/mp3">
+  </audio>
+
+  <button class="music-btn" onclick="toggleMusic()">🎵 Music</button>
+
+  <!-- FLOWERS -->
+  <div class="flower" style="left:10%;animation-duration:10s;">🌸</div>
+  <div class="flower" style="left:30%;animation-duration:12s;">💮</div>
+  <div class="flower" style="left:55%;animation-duration:8s;">🌸</div>
+  <div class="flower" style="left:80%;animation-duration:14s;">💗</div>
+
+  <!-- PAGE 1 -->
+  <section class="page active" id="page1">
+
+    <p style="letter-spacing:6px;color:#b06b87;font-size:13px;">A SURPRISE MADE WITH LOVE</p>
+
+    <div class="gift-box">🎁</div>
+
+    <h1>Mummy</h1>
+
+    <p class="sub">
+      Rayzen made this especially for you 🌸
+    </p>
+
+    <button class="btn" onclick="showPage(2)">
+      OPEN YOUR SURPRISE ✨
+    </button>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="page" id="page2">
+
+    <div class="heading">
+      <h2>Pop the Balloons 🎈</h2>
+      <p>Each balloon holds a memory ❤️</p>
+    </div>
+
+    <div class="balloons">
+
+      <div class="balloon" onclick="openPopup(0)">
+        <div class="bubble" style="background:#ff2d7a"></div>
+        <div class="string"></div>
+      </div>
+
+      <div class="balloon" onclick="openPopup(1)">
+        <div class="bubble" style="background:#7d3cff"></div>
+        <div class="string"></div>
+      </div>
+
+      <div class="balloon" onclick="openPopup(2)">
+        <div class="bubble" style="background:#ff7b29"></div>
+        <div class="string"></div>
+      </div>
+
+      <div class="balloon" onclick="openPopup(3)">
+        <div class="bubble" style="background:#26a9ff"></div>
+        <div class="string"></div>
+      </div>
+
+      <div class="balloon" onclick="openPopup(4)">
+        <div class="bubble" style="background:#00cc88"></div>
+        <div class="string"></div>
+      </div>
+
+    </div>
+
+    <button class="btn next-btn" onclick="showPage(3)">
+      READ LETTER 💌
+    </button>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="page" id="page3">
+
+    <p style="letter-spacing:6px;color:#b06b87;font-size:13px;">A LETTER WRITTEN JUST FOR YOU</p>
+
+    <h2 class="letter-title">With All My Love 💗</h2>
+
+    <div class="letter-box">
+      Happy Mother’s Day, Mummy ❤️<br><br>
+
+      Thank you for always supporting me,
+      loving me, and standing beside me
+      no matter what.
+
+      Your care, sacrifices, and strength
+      mean everything to me.
+
+      I may not say it every day,
+      but I’m truly lucky to have you in my life.
+
+      Thank you for believing in me,
+      even on days when I doubted myself.
+
+      Love you forever 🌸
+
+      <div class="love">
+        — Rayzen ❤️
+      </div>
+    </div>
+
+  </section>
+
+  <!-- POPUP -->
+  <div class="popup" id="popup">
+    <div class="popup-card">
+      <img id="popupImg" src="" alt="photo">
+      <h3 id="popupTitle"></h3>
+      <p id="popupText"></p>
+      <button class="close" onclick="closePopup()">Close 💖</button>
+    </div>
+  </div>
+
+  <script>
+
+    const memories = [
+      {
+        img:'photo1.jpg',
+        title:'My Safe Place ❤️',
+        text:'No matter what happens, you always make everything better.'
+      },
+      {
+        img:'photo2.jpg',
+        title:'Best Smile 🌸',
+        text:'Your smile is still my favorite comfort in the world.'
+      },
+      {
+        img:'photo3.jpg',
+        title:'Strongest Woman 💪',
+        text:'You handle everything with love and strength.'
+      },
+      {
+        img:'photo4.jpg',
+        title:'My Childhood 🥺',
+        text:'Every memory with you feels warm and magical.'
+      },
+      {
+        img:'photo5.jpg',
+        title:'Forever Love 💗',
+        text:'Thank you for being my home, my support, my everything.'
+      }
+    ];
+
+    function showPage(pageNumber){
+      document.querySelectorAll('.page').forEach(page=>{
+        page.classList.remove('active');
+      });
+
+      document.getElementById(`page${pageNumber}`).classList.add('active');
+
+      const music = document.getElementById('bgMusic');
+      music.play();
+    }
+
+    function openPopup(index){
+      document.getElementById('popup').style.display='flex';
+
+      document.getElementById('popupImg').src=memories[index].img;
+      document.getElementById('popupTitle').innerText=memories[index].title;
+      document.getElementById('popupText').innerText=memories[index].text;
+
+      if(navigator.vibrate){
+        navigator.vibrate(120);
+      }
+    }
+
+    function closePopup(){
+      document.getElementById('popup').style.display='none';
+    }
+
+    function toggleMusic(){
+      const music=document.getElementById('bgMusic');
+
+      if(music.paused){
+        music.play();
+      }else{
+        music.pause();
+      }
+    }
+
+  </script>
+</body>
+</html>
+```
+
